@@ -1,0 +1,19 @@
+<?php
+
+use DummyRootNamespaceEntities\Dummy\Dummy;
+
+class DummiesTableSeeder extends AbstractSeeder
+{
+    protected $truncateTables = [
+        CreateDummiesTable::TABLENAME
+    ];
+
+    protected $itemList = [
+        //
+    ];
+
+    public function __construct(Dummy $model)
+    {
+        $this->model = $model;
+    }
+}

@@ -1,0 +1,15 @@
+<?php namespace DummyRootNamespaceEntities\Dummy;
+
+use DummyRootNamespaceEntities\AbstractRepository;
+
+class DummyRepository extends AbstractRepository
+{
+    protected $filters = [
+        //
+    ];
+
+    public function __construct(Dummy $model)
+    {
+        $this->model = $model;
+    }
+}

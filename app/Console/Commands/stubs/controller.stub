@@ -1,0 +1,17 @@
+<?php namespace DummyRootNamespaceHttp\Controllers;
+
+use DummyRootNamespaceServices\Entities\Dummy\DummyService;
+
+class DummyController extends AbstractController
+{
+    protected $with = [
+        //
+    ];
+
+    public function __construct(DummyService $service)
+    {
+        parent::__construct();
+
+        $this->service = $service;
+    }
+}

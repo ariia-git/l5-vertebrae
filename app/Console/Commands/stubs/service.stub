@@ -1,0 +1,12 @@
+<?php namespace DummyRootNamespaceServices\Entities\Dummy;
+
+use DummyRootNamespaceEntities\Dummy\DummyRepository;
+use DummyRootNamespaceServices\Entities\AbstractService;
+
+class DummyService extends AbstractService
+{
+    public function __construct(DummyRepository $repo)
+    {
+        $this->repo = $repo;
+    }
+}
