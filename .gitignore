@@ -1,7 +1,10 @@
 /.idea
 /node_modules
+/resources/assets/**/vendor*
 /vendor
 
 .env
+.phpstorm.meta.php
+_ide_helper.php
 npm-debug.log
 yarn-error.log
