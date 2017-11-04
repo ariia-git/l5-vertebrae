@@ -13,7 +13,18 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'L5.5-Vertebrae'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
+
+    'version' => '0.0.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +178,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -175,7 +188,15 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\FacadeServiceProvider::class,
+        App\Providers\FormRequestServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+    ],
+
+    'dev-providers' => [
+
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 
@@ -192,6 +213,9 @@ return [
 
     'aliases' => [
 
+        /*
+         * Laravel Framework Aliases...
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -225,6 +249,18 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        /*
+         * Package Aliases...
+         */
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
+        /*
+         * Application Aliases...
+         */
+
 
     ],
 

@@ -3,6 +3,7 @@
     "description": "Backbone for personal Laravel 5.5 projects.",
     "author": "n.l.menke <n.l.menke@live.com>",
     "license": "MIT",
+    "version": "0.0.0",
     "private": true,
     "scripts": {
         "dev": "npm run development",

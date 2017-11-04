@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Ubuntu|Ubuntu+Mono" type="text/css" rel="stylesheet">
@@ -15,7 +15,7 @@
         html,
         body {
             background-color: #fff;
-            color: #636b6f;
+            color: #aeaeae;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 100;
             height: 100vh;
@@ -47,17 +47,27 @@
         }
 
         .title {
+            color: #f4645f;
             font-size: 84px;
         }
 
+        .subtitle {
+            font-size: 20px;
+        }
+
         .links > a {
-            color: #636b6f;
+            color: #525252;
             padding: 0 25px;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+            transition: .2s ease-out;
+        }
+
+        .links > a:hover {
+            color: #f4645f;
         }
 
         .m-b-md {
@@ -79,16 +89,17 @@
     @endif
 
     <div class="content">
-        <div class="title m-b-md">
-            Laravel
+        <div class="title">
+            {{ config('app.name') }}
+        </div>
+
+        <div class="subtitle m-b-md">
+            Built with Laravel {{ \App::version() }}
         </div>
 
         <div class="links">
-            <a href="https://laravel.com/docs">Documentation</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+            <a href="https://github.com/nlmenke/l55-vertebrae">GitHub</a>
+            <a href="https://laravel.com/docs">Laradocs</a>
         </div>
     </div>
 </div>

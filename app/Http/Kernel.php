@@ -18,8 +18,6 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-//use Illuminate\Session\Middleware\AuthenticateSession;
-
 class Kernel extends HttpKernel
 {
     /**
