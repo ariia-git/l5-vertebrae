@@ -20,9 +20,6 @@ class BuildPageFiles extends Command
      */
     protected $description = 'Build the files needed for a new page';
 
-    /**
-     * Create a new command instance.
-     */
     public function __construct()
     {
         parent::__construct();
@@ -56,6 +53,8 @@ class BuildPageFiles extends Command
 
     /**
      * Execute the console command.
+     *
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     public function handle()
     {
@@ -160,9 +159,10 @@ class BuildPageFiles extends Command
     /**
      * Get file data from stub and build the file contents.
      *
-     * @param $name
-     * @param $type
+     * @param string $name
+     * @param string $type
      * @return mixed
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
     private function buildFile($name, $type)
     {
@@ -174,7 +174,7 @@ class BuildPageFiles extends Command
     /**
      * Generate migration file.
      *
-     * @param $name
+     * @param string $name
      */
     private function buildMigration($name)
     {
@@ -192,7 +192,7 @@ class BuildPageFiles extends Command
     /**
      * Pull specified stub.
      *
-     * @param $type
+     * @param string $type
      * @return string
      */
     private function getStub($type)
@@ -203,7 +203,7 @@ class BuildPageFiles extends Command
     /**
      * Add file to git.
      *
-     * @param $file
+     * @param string $file
      */
     private function gitAdd($file)
     {
@@ -213,9 +213,9 @@ class BuildPageFiles extends Command
     /**
      * Save the generated file.
      *
-     * @param $path
-     * @param $filename
-     * @param $file
+     * @param string $path
+     * @param string $filename
+     * @param string $file
      */
     private function saveFile($path, $filename, $file)
     {

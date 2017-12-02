@@ -15,3 +15,12 @@
 $router->get('/', function () {
     return view('welcome');
 });
+
+$router->group(['prefix' => 'admin'], function ($router) {
+    /** @var \Illuminate\Routing\Router $router */
+    $router->resource('languages', 'LanguageController', ['except' => ['show']]);
+});
+
+$router->get('{all}', function () {
+    app()->abort(404);
+})->where('all', '.*');
