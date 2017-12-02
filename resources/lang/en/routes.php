@@ -7,6 +7,7 @@ return [
 
     'admin' => 'admin',
 
+    'countries' => 'countries',
     'languages' => 'languages',
 
 ];

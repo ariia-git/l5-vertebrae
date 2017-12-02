@@ -30,7 +30,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('assets/scripts/example.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/scripts/app.js') }}" type="text/javascript"></script>
 
 @include('layouts.partials.toasts')
 

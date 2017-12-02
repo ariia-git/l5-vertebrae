@@ -15,5 +15,5 @@ mix.options({
        publicPath: 'public/assets/',
        resourceRoot: '/assets/'
    })
-   .js('resources/assets/scripts/example.js', 'scripts')
+   .js('resources/assets/scripts/app.js', 'scripts')
    .sass('resources/assets/sass/style.scss', 'styles');
