@@ -1,6 +1,7 @@
 <?php namespace App\Entities\Country;
 
 use App\Entities\AbstractEntity;
+use App\Entities\Locale\Locale;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Country extends AbstractEntity
@@ -11,4 +12,9 @@ class Country extends AbstractEntity
         'iso_code',
         'name'
     ];
+
+    public function locales()
+    {
+        return $this->hasMany(Locale::class);
+    }
 }

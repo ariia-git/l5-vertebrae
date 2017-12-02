@@ -23,6 +23,9 @@ return [
     'before' => 'Before',
     'after' => 'After',
 
+    'yes' => 'Yes',
+    'no' => 'No',
+
     'active' => 'Active',
     'inactive' => 'Inactive',
 

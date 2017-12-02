@@ -9,5 +9,6 @@ return [
 
     'countries' => 'countries',
     'languages' => 'languages',
+    'locales' => 'locales',
 
 ];
