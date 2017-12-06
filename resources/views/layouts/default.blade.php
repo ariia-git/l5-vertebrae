@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="{{ app()->getLocale() }}">
+<html lang="{{ \Localization::getCurrentLocaleRegional() }}" dir="{{ \Localization::getCurrentLocaleDirection() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

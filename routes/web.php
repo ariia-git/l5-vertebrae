@@ -18,9 +18,9 @@ $router->get('/', function () {
 
 $router->group(['prefix' => 'admin'], function ($router) {
     /** @var \Illuminate\Routing\Router $router */
-    $router->resource('countries', 'CountryController', ['except' => ['show']]);
-    $router->resource('languages', 'LanguageController', ['except' => ['show']]);
-    $router->resource('locales', 'LocaleController', ['except' => ['show']]);
+    $router->resource(\Localization::transRoute('routes.countries'), 'CountryController', ['except' => ['show']]);
+    $router->resource(\Localization::transRoute('routes.languages'), 'LanguageController', ['except' => ['show']]);
+    $router->resource(\Localization::transRoute('routes.locales'), 'LocaleController', ['except' => ['show']]);
 });
 
 $router->get('{all}', function () {

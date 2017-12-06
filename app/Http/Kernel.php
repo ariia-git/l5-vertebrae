@@ -1,6 +1,10 @@
 <?php namespace App\Http;
 
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\Localization\LocaleCookieRedirect;
+use App\Http\Middleware\Localization\LocaleSessionRedirect;
+use App\Http\Middleware\Localization\LocalizationRedirect;
+use App\Http\Middleware\Localization\LocalizationRoutes;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
@@ -69,5 +73,10 @@ class Kernel extends HttpKernel
         'can' => Authorize::class,
         'guest' => RedirectIfAuthenticated::class,
         'throttle' => ThrottleRequests::class,
+
+        'localize' => LocalizationRoutes::class,
+        'localizationRedirect' => LocalizationRedirect::class,
+        'localeSessionRedirect' => LocaleSessionRedirect::class,
+        'localeCookieRedirect' => LocaleCookieRedirect::class,
     ];
 }

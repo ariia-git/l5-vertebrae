@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use App\Exceptions\ActiveLocalesNotDefined;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -28,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
      * Define the routes for the application.
      *
      * @return void
+     * @throws ActiveLocalesNotDefined
      */
     public function map()
     {
@@ -46,7 +48,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        \Route::middleware('web')
+        \Route::prefix(\Localization::setLocale())
+              ->middleware([
+                  'web',
+                  'localize',
+                  'localizationRedirect',
+                  'localeSessionRedirect'
+               ])
               ->namespace($this->namespace)
               ->group(base_path('routes/web.php'));
     }
@@ -60,7 +68,10 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         \Route::prefix('api')
-              ->middleware('api')
+              ->middleware([
+                  'api',
+//                  'localeCookieRedirect'
+              ])
               ->namespace($this->namespace)
               ->group(base_path('routes/api.php'));
     }

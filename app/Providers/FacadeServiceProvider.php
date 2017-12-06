@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use App\Services\Localization\LocalizationService;
 use Illuminate\Support\ServiceProvider;
 
 class FacadeServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class FacadeServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            //
+            'localization'
         ];
     }
 
@@ -28,6 +29,10 @@ class FacadeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(LocalizationService::class, function () {
+            return new LocalizationService();
+        });
+
+        $this->app->alias(LocalizationService::class, 'localization');
     }
 }

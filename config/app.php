@@ -260,7 +260,7 @@ return [
         /*
          * Application Aliases...
          */
-
+        'Localization' => App\Facades\Localization::class,
 
     ],
 
