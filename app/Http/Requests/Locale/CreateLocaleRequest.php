@@ -12,7 +12,10 @@ class CreateLocaleRequest extends AbstractFormRequest
         return [
             'country_id' => 'required|integer',
             'language_id' => 'required|integer',
-            'code' => 'required|unique:locales'
+            'code' => 'required|unique:locales',
+            'currency_symbol_first' => 'required',
+            'decimal_mark' => 'required',
+            'thousands_separator' => 'required'
         ];
     }
 

@@ -20,6 +20,7 @@
                         <tr>
                             <td>{{ trans_choice('common.codes', 1) }}</td>
                             <td>{{ trans_choice('common.names', 1) }}</td>
+                            <td>{{ trans_choice('currency.currencies', 1) }}</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                         <tr>
                             <td>{{ $country['iso_code'] }}</td>
                             <td>{{ $country['name'] }}</td>
+                            <td>{{ $country['currency']['name'] }}</td>
                             <td width="75">
 
                                 {!! \Form::open([

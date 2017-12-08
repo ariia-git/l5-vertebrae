@@ -12,7 +12,10 @@ class UpdateLocaleRequest extends AbstractFormRequest
         return [
             'country_id' => 'required|integer',
             'language_id' => 'required|integer',
-            'code' => 'required|unique:locales,code,' . $this->route('locale')
+            'code' => 'required|unique:locales,code,' . $this->route('locale'),
+            'currency_symbol_first' => 'required',
+            'decimal_mark' => 'required',
+            'thousands_separator' => 'required'
         ];
     }
 

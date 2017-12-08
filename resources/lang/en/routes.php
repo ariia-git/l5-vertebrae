@@ -8,6 +8,7 @@ return [
     'admin' => 'admin',
 
     'countries' => 'countries',
+    'currencies' => 'currencies',
     'languages' => 'languages',
     'locales' => 'locales',
 

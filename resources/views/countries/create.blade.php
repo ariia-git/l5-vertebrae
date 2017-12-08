@@ -40,6 +40,17 @@
                             </div>
                         </div>
 
+                        <!-- Currency Field -->
+                        <div class="form-group">
+                            <div class="input-group{{ $errors->has('currency_id') ? ' has-error' : '' }}">
+                                <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                {!! \Form::select('currency_id', $currencies, old('currency_id'), [
+                                    'class' => 'form-control',
+                                    'placeholder' => '- ' . trans('common.select') . ' ' . trans_choice('currencies.currencies', 1) . ' -'
+                                ]) !!}
+                            </div>
+                        </div>
+
                         <!-- Submit Form -->
                         <div class="form-group">
                             {!! \Form::button('<i class="fa fa-save"></i> ' . trans('common.save'), [

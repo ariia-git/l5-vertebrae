@@ -21,6 +21,9 @@
                             <td>{{ trans_choice('common.codes', 1) }}</td>
                             <td>{{ trans_choice('languages.languages', 1) }}</td>
                             <td>{{ trans_choice('countries.countries', 1) }}</td>
+                            <td>{{ trans('locales.number_style') }}</td>
+                            <td>{{ trans('locales.regional') }}</td>
+                            <td>{{ trans('locales.script') }}</td>
                             <td>{{ trans('common.active') }}</td>
                             <td></td>
                         </tr>
@@ -33,6 +36,9 @@
                             <td>{{ $locale['code'] }}</td>
                             <td>{{ $locale['language']['name'] }}</td>
                             <td>{{ $locale['country']['name'] }}</td>
+                            <td>{{ '1' . $locale['thousands_separator'] . '000' . $locale['decimal_mark'] . '0' }}</td>
+                            <td>{{ \Localization::getLocaleRegional($locale['code']) }}</td>
+                            <td>{{ \Localization::getLocaleScript($locale['code']) }}</td>
                             <td>{{ $locale['active'] ? trans('common.yes') : trans('common.no') }}</td>
                             <td width="75">
 

@@ -10,6 +10,7 @@ class CreateCountryRequest extends AbstractFormRequest
     public function rules()
     {
         return [
+            'currency_id' => 'required|integer',
             'iso_code' => 'required|size:2|unique:countries',
             'name' => 'required'
         ];

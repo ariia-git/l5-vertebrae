@@ -2,6 +2,7 @@
 
 use App\Http\Requests\AbstractFormRequest;
 use App\Services\Entities\Country\CountryService;
+use App\Services\Entities\Currency\CurrencyService;
 
 class CountryController extends AbstractController
 {
@@ -42,12 +43,15 @@ class CountryController extends AbstractController
      */
     public function create()
     {
+        $currencies = app(CurrencyService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
+
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.countries'), 'text' => trans_choice('countries.countries', 2)];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.countries') . '/' . trans('routes.create'), 'text' => trans('common.create')];
 
         return view('countries.create', compact(
-            'breadcrumbs'
+            'breadcrumbs',
+            'currencies'
         ));
     }
 
@@ -90,13 +94,16 @@ class CountryController extends AbstractController
     public function edit($id)
     {
         if ($country = $this->service->find($id)) {
+            $currencies = app(CurrencyService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
+
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.countries'), 'text' => trans_choice('countries.countries', 2)];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.countries') . '/' . $id . '/' . trans('routes.edit'), 'text' => $country->name];
 
             return view('countries.edit', compact(
                 'breadcrumbs',
-                'country'
+                'country',
+                'currencies'
             ));
         } else {
             \Session::push('errors', trans('common.error.action_not_completed', ['item' => trans_choice('countries.countries', 1), 'action' => strtolower(trans('common.found'))]));

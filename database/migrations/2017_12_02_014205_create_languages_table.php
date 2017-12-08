@@ -22,9 +22,6 @@ class CreateLanguagesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        $languagesTableSeeder = app(LanguagesTableSeeder::class);
-        $languagesTableSeeder->run();
     }
 
     /**

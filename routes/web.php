@@ -16,9 +16,11 @@ $router->get('/', function () {
     return view('welcome');
 });
 
+// todo: admin permissions
 $router->group(['prefix' => 'admin'], function ($router) {
     /** @var \Illuminate\Routing\Router $router */
     $router->resource(\Localization::transRoute('routes.countries'), 'CountryController', ['except' => ['show']]);
+    $router->resource(\Localization::transRoute('routes.currencies'), 'CurrencyController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.languages'), 'LanguageController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.locales'), 'LocaleController', ['except' => ['show']]);
 });

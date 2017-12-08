@@ -4,7 +4,6 @@
 // Variables
 @import 'colors';
 @import 'variables';
-@import 'base';
 
 // Bootstrap
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
@@ -14,3 +13,9 @@
 
 // toastr
 @import '~toastr/toastr.scss';
+
+@import 'base';
+@import 'countries';
+@import 'currencies';
+@import 'languages';
+@import 'locales';

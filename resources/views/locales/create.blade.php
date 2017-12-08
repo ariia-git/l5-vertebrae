@@ -51,6 +51,39 @@
                             </div>
                         </div>
 
+                        <!-- Currency Symbol First Field -->
+                        <div class="form-group">
+                            <div class="input-group{{ $errors->has('currency_symbol_first') ? ' has-error' : '' }}">
+                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                {!! \Form::select('currency_symbol_first', [1 => trans('common.before'), 0 => trans('common.after')], old('currency_symbol_first'), [
+                                    'class' => 'form-control',
+                                    'placeholder' => '- ' . trans('locales.currency_symbol_placement') . ' -'
+                                ]) !!}
+                            </div>
+                        </div>
+
+                        <!-- Thousands Separator Field -->
+                        <div class="form-group">
+                            <div class="input-group{{ $errors->has('thousands_separator') ? ' has-error' : '' }}">
+                                <span class="input-group-addon"><i class="fa fa-comma"></i></span>
+                                {!! \Form::text('thousands_separator', old('thousands_separator'), [
+                                    'class' => 'form-control',
+                                    'placeholder' => trans('locales.thousands_separator')
+                                ]) !!}
+                            </div>
+                        </div>
+
+                        <!-- Decimal Mark Field -->
+                        <div class="form-group">
+                            <div class="input-group{{ $errors->has('decimal_mark') ? ' has-error' : '' }}">
+                                <span class="input-group-addon"><i class="fa fa-period"></i></span>
+                                {!! \Form::text('decimal_mark', old('decimal_mark'), [
+                                    'class' => 'form-control',
+                                    'placeholder' => trans('locales.decimal_mark')
+                                ]) !!}
+                            </div>
+                        </div>
+
                         <!-- Active Field -->
                         <div class="checkbox">
                             <label>

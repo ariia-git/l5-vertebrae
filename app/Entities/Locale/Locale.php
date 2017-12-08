@@ -15,6 +15,9 @@ class Locale extends AbstractEntity
         'country_id',
         'language_id',
         'code',
+        'currency_symbol_first',
+        'decimal_mark',
+        'thousands_separator',
         'active'
     ];
 

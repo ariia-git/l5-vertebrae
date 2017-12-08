@@ -21,9 +21,6 @@ class CreateCountriesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-
-        $countriesTableSeeder = app(CountriesTableSeeder::class);
-        $countriesTableSeeder->run();
     }
 
     /**

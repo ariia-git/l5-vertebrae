@@ -3,9 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateLocalesTable extends Migration
+class CreateCurrenciesTable extends Migration
 {
-    const TABLENAME = 'locales';
+    const TABLENAME = 'currencies';
 
     /**
      * Run the migrations.
@@ -16,12 +16,11 @@ class CreateLocalesTable extends Migration
     {
         \Schema::create(self::TABLENAME, function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('country_id');
-            $table->foreign('country_id')->references('id')->on(CreateCountriesTable::TABLENAME);
-            $table->unsignedInteger('language_id');
-            $table->foreign('language_id')->references('id')->on(CreateLanguagesTable::TABLENAME);
-            $table->string('code', 15)->index();
-            $table->boolean('active')->default(false);
+            $table->string('iso_code', 3)->index(); // ISO 4217; 3 char
+            $table->string('name');
+            $table->string('symbol')->default('$');
+            $table->integer('decimal_precision')->default(2);
+            $table->decimal('exchange_rate', 8, 6)->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

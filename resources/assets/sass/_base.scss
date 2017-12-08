@@ -1,5 +1,19 @@
+body {
+    font-family: $font-family-sans-serif;
+}
+
 .fa {
     width: 1em;
+}
+
+.fa-comma:before {
+    content: ',';
+    font-weight: bold;
+}
+
+.fa-period:before {
+    content: '.';
+    font-weight: bold;
 }
 
 #back_to_top {

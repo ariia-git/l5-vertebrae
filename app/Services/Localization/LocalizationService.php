@@ -482,6 +482,42 @@ class LocalizationService
     }
 
     /**
+     * Returns the locale's regional.
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function getLocaleRegional($locale)
+    {
+        // need to check if it exists
+        if (isset($this->supportedLocales[$locale]['regional'])) {
+            $regional = $this->supportedLocales[$locale]['regional'];
+
+            return str_replace('-', '_', $regional);
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * Returns the locale's script.
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function getLocaleScript($locale)
+    {
+        // need to check if it exists
+        if (isset($this->supportedLocales[$locale]['script'])) {
+            $script = $this->supportedLocales[$locale]['script'];
+
+            return str_replace('-', '_', $script);
+        } else {
+            return;
+        }
+    }
+
+    /**
      * Return an array of all supported Locales but in the order the user
      * has specified in the config file. Useful for the language selector.
      *

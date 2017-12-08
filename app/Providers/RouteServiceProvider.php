@@ -1,6 +1,5 @@
 <?php namespace App\Providers;
 
-use App\Exceptions\ActiveLocalesNotDefined;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -29,7 +28,6 @@ class RouteServiceProvider extends ServiceProvider
      * Define the routes for the application.
      *
      * @return void
-     * @throws ActiveLocalesNotDefined
      */
     public function map()
     {

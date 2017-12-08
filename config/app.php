@@ -106,6 +106,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Currency Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application currency determines the base currency used to calculate
+    | pricing by the application. Set this value to any of the currencies
+    | supported by the application. This should fit the locale setting.
+    |
+    */
+
+    'currency' => 'USD',
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
