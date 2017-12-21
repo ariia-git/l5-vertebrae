@@ -23,7 +23,7 @@ before_install:
 
 install:
   - mysql -e 'create database ci_vertebrae;'
-  - cp .env.travis .env
+  - cp .env.ci .env
   - composer install --no-interaction
   - php artisan key:generate
   - yarn
