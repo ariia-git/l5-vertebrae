@@ -2,6 +2,15 @@
 
 return [
 
+    // Auth routes
+    'login' => 'login',
+    'logout' => 'logout',
+    'register' => 'register',
+    'password' => [
+        'reset' => 'password/reset',
+        'email' => 'password/email',
+    ],
+
     'create' => 'create',
     'edit' => 'edit',
 

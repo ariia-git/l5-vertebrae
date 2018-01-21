@@ -38,6 +38,12 @@
             position: relative;
         }
 
+        .top-left {
+            position: absolute;
+            left: 10px;
+            top: 18px;
+        }
+
         .top-right {
             position: absolute;
             right: 10px;
@@ -72,6 +78,10 @@
             color: #f4645f;
         }
 
+        .badges {
+            //
+        }
+
         .m-b-md {
             margin-bottom: 30px;
         }
@@ -79,16 +89,28 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
-            @endauth
-        </div>
-    @endif
+    <div class="top-left links">
+        <a href="{{ url('/') }}">Home</a>
+    </div>
+
+    <div class="top-right links">
+        @auth
+            <a href="{{ url(trans('routes.logout')) }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+
+            {!! \Form::open([
+                'url' => url(trans('routes.logout')),
+                'method' => 'post',
+                'id' => 'logout-form',
+                'style' => 'display:none;'
+            ]) !!}
+            {!! \Form::close() !!}
+        @else
+            <a href="{{ url(trans('routes.login')) }}">Login</a>
+            <a href="{{ url(trans('routes.register')) }}">Register</a>
+        @endauth
+    </div>
 
     <div class="content">
         <div class="title">
@@ -96,12 +118,17 @@
         </div>
 
         <div class="subtitle m-b-md">
-            Built with Laravel {{ \App::version() }}
+            Built with Laravel {{ \App::version() }}<br>
         </div>
 
-        <div class="links">
+        <div class="links m-b-md">
             <a href="https://github.com/nlmenke/l55-vertebrae">GitHub</a>
             <a href="https://laravel.com/docs">Laradocs</a>
+        </div>
+
+        <div class="badges">
+            <a href="https://travis-ci.org/nlmenke/l55-vertebrae"><img src="https://travis-ci.org/nlmenke/l55-vertebrae.svg"></a>
+            <a href="https://packagist.org/packages/laravel/laravel"><img src="https://poser.pugx.org/laravel/laravel/license"></a>
         </div>
     </div>
 </div>

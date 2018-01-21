@@ -1,5 +1,6 @@
 <?php
 
+use App\Entities\User\User;
 use Faker\Generator as Faker;
 
 /*
@@ -13,13 +14,14 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(User::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
+        'username' => $faker->userName,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => str_random(10)
     ];
 });

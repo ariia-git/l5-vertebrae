@@ -29,7 +29,28 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
 
-                <!-- -->
+                @auth
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            {{ Auth::user()->username }} <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ url(trans('routes.logout')) }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ url(trans('routes.logout')) }}" method="POST" style="display:none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="{{ url(trans('routes.login')) }}">Login</a></li>
+                    <li><a href="{{ url(trans('routes.register')) }}">Register</a></li>
+                @endauth
 
             </ul>
         </div>

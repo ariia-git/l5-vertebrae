@@ -12,12 +12,25 @@
 */
 
 /** @var \Illuminate\Routing\Router $router */
-$router->get('/', function () {
-    return view('welcome');
-});
+$router->get('/', 'DashboardController@index');
 
-// todo: admin permissions
-$router->group(['prefix' => 'admin'], function ($router) {
+// Authentication Routes...
+$this->get(\Localization::transRoute('routes.login'), 'Auth\LoginController@showLoginForm')->name('login');
+$this->post(\Localization::transRoute('routes.login'), 'Auth\LoginController@login');
+$this->post(\Localization::transRoute('routes.logout'), 'Auth\LoginController@logout')->name('logout');
+
+// Registration Routes...
+$this->get(\Localization::transRoute('routes.register'), 'Auth\RegisterController@showRegistrationForm')->name('register');
+$this->post(\Localization::transRoute('routes.register'), 'Auth\RegisterController@register');
+
+// Password Reset Routes...
+$this->get(\Localization::transRoute('routes.password.reset'), 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+$this->post(\Localization::transRoute('routes.password.email'), 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+$this->get(\Localization::transRoute('routes.password.reset') . '/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+$this->post(\Localization::transRoute('routes.password.reset'), 'Auth\ResetPasswordController@reset');
+
+// Admin routes - todo: permissions
+$router->group(['prefix' => \Localization::transRoute('routes.admin')], function ($router) {
     /** @var \Illuminate\Routing\Router $router */
     $router->resource(\Localization::transRoute('routes.countries'), 'CountryController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.currencies'), 'CurrencyController', ['except' => ['show']]);
