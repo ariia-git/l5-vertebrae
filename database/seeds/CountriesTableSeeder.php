@@ -34,7 +34,7 @@ class CountriesTableSeeder extends AbstractSeeder
             ['iso_code' => 'BH', 'name' => 'Bahrain', 'currency_id' => $this->getCurrencyId('BHD')],
             ['iso_code' => 'BD', 'name' => 'Bangladesh', 'currency_id' => $this->getCurrencyId('BDT')],
             ['iso_code' => 'BB', 'name' => 'Barbados', 'currency_id' => $this->getCurrencyId('BBD')],
-            ['iso_code' => 'BY', 'name' => 'Belarus', 'currency_id' => $this->getCurrencyId('BYN')],
+            ['iso_code' => 'BY', 'name' => 'Belarus', 'currency_id' => $this->getCurrencyId('BYR')],
             ['iso_code' => 'BE', 'name' => 'Belgium', 'currency_id' => $this->getCurrencyId('EUR')],
             ['iso_code' => 'BZ', 'name' => 'Belize', 'currency_id' => $this->getCurrencyId('BZD')],
             ['iso_code' => 'BJ', 'name' => 'Benin', 'currency_id' => $this->getCurrencyId('XOF')],
@@ -262,7 +262,7 @@ class CountriesTableSeeder extends AbstractSeeder
             ['iso_code' => 'EH', 'name' => 'Western Sahara', 'currency_id' => $this->getCurrencyId('MAD')],
             ['iso_code' => 'YE', 'name' => 'Yemen', 'currency_id' => $this->getCurrencyId('YER')],
             ['iso_code' => 'ZM', 'name' => 'Zambia', 'currency_id' => $this->getCurrencyId('ZMW')],
-            ['iso_code' => 'ZW', 'name' => 'Zimbabwe', 'currency_id' => $this->getCurrencyId('ZWL')],
+            ['iso_code' => 'ZW', 'name' => 'Zimbabwe', 'currency_id' => $this->getCurrencyId('ZWD')],
         ];
     }
 
