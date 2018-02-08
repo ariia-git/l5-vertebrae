@@ -26,6 +26,7 @@ install:
   - cp .env.ci .env
   - composer install --no-interaction
   - php artisan key:generate
+  - php artisan migrate --seed
   - yarn
   - npm run prod
 
