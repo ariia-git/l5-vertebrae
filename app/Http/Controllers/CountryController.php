@@ -24,6 +24,8 @@ class CountryController extends AbstractController
      */
     public function index()
     {
+        $this->middleware('permission:countries');
+
         $countries = $this->service->getIndex($this->count, $this->page, $this->filter, $this->sort);
         $countries->setPath(trans('routes.countries'))->appends(\Request::except('page'));
 
@@ -43,6 +45,8 @@ class CountryController extends AbstractController
      */
     public function create()
     {
+        $this->middleware('permission:countries.create');
+
         $currencies = app(CurrencyService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
 
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
@@ -64,6 +68,8 @@ class CountryController extends AbstractController
      */
     public function store(AbstractFormRequest $request)
     {
+        $this->middleware('permission:countries.create');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -93,6 +99,8 @@ class CountryController extends AbstractController
      */
     public function edit($id)
     {
+        $this->middleware('permission:countries.update');
+
         if ($country = $this->service->find($id)) {
             $currencies = app(CurrencyService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
 
@@ -122,6 +130,8 @@ class CountryController extends AbstractController
      */
     public function update(AbstractFormRequest $request, $id)
     {
+        $this->middleware('permission:countries.update');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -152,6 +162,8 @@ class CountryController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->middleware('permission:countries.destroy');
+
         \DB::beginTransaction();
 
         try {

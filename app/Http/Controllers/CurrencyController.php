@@ -23,6 +23,8 @@ class CurrencyController extends AbstractController
      */
     public function index()
     {
+        $this->middleware('permission:currencies');
+
         $currencies = $this->service->getIndex($this->count, $this->page, $this->filter, $this->sort);
         $currencies->setPath('currencies')->appends(\Request::except('page'));
 
@@ -42,6 +44,8 @@ class CurrencyController extends AbstractController
      */
     public function create()
     {
+        $this->middleware('permission:currencies.create');
+
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies'), 'text' => trans_choice('currencies.currencies', 2)];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies') . '/' . trans('routes.create'), 'text' => trans('common.create')];
@@ -60,6 +64,8 @@ class CurrencyController extends AbstractController
      */
     public function store(AbstractFormRequest $request)
     {
+        $this->middleware('permission:currencies.create');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -89,6 +95,8 @@ class CurrencyController extends AbstractController
      */
     public function edit($id)
     {
+        $this->middleware('permission:currencies.update');
+
         if ($currency = $this->service->find($id)) {
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies'), 'text' => trans_choice('currencies.currencies', 2)];
@@ -115,6 +123,8 @@ class CurrencyController extends AbstractController
      */
     public function update(AbstractFormRequest $request, $id)
     {
+        $this->middleware('permission:currencies.update');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -145,6 +155,8 @@ class CurrencyController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->middleware('permission:currencies.destroy');
+
         \DB::beginTransaction();
 
         try {

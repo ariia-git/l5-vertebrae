@@ -41,6 +41,8 @@ class AbstractSeeder extends Seeder
 
     /**
      * Run the seeder.
+     *
+     * @throws \Exception
      */
     public function run()
     {

@@ -32,6 +32,8 @@ return [
     'back_to_top' => 'Back to Top',
     'toggle_navigation' => 'Toggle Navigation',
 
+    'description' => 'Description',
+
     'success' => [
         'success' => 'Success',
         'action_completed' => ':item successfully :action',

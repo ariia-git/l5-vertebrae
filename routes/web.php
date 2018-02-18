@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 /** @var \Illuminate\Routing\Router $router */
 $router->get('/', 'DashboardController@index');
 
@@ -29,8 +18,8 @@ $this->post(\Localization::transRoute('routes.password.email'), 'Auth\ForgotPass
 $this->get(\Localization::transRoute('routes.password.reset') . '/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post(\Localization::transRoute('routes.password.reset'), 'Auth\ResetPasswordController@reset');
 
-// Admin routes - todo: permissions
-$router->group(['prefix' => \Localization::transRoute('routes.admin')], function ($router) {
+// Admin routes
+$router->group(['prefix' => \Localization::transRoute('routes.admin'), 'middleware' => 'permission:admin'], function ($router) {
     /** @var \Illuminate\Routing\Router $router */
     $router->resource(\Localization::transRoute('routes.countries'), 'CountryController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.currencies'), 'CurrencyController', ['except' => ['show']]);

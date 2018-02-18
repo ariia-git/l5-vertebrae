@@ -23,6 +23,8 @@ class LanguageController extends AbstractController
      */
     public function index()
     {
+        $this->middleware('permission:languages');
+
         $breadcrumbs = [];
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.languages'), 'text' => trans_choice('languages.languages', 2)];
@@ -43,6 +45,8 @@ class LanguageController extends AbstractController
      */
     public function create()
     {
+        $this->middleware('permission:languages.create');
+
         $breadcrumbs = [];
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.languages'), 'text' => trans_choice('languages.languages', 2)];
@@ -62,6 +66,8 @@ class LanguageController extends AbstractController
      */
     public function store(AbstractFormRequest $request)
     {
+        $this->middleware('permission:languages.create');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -91,6 +97,8 @@ class LanguageController extends AbstractController
      */
     public function edit($id)
     {
+        $this->middleware('permission:languages.update');
+
         if ($language = $this->service->find($id)) {
             $breadcrumbs = [];
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
@@ -118,6 +126,8 @@ class LanguageController extends AbstractController
      */
     public function update(AbstractFormRequest $request, $id)
     {
+        $this->middleware('permission:languages.update');
+
         $input = $request->all();
 
         \DB::beginTransaction();
@@ -148,6 +158,8 @@ class LanguageController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->middleware('permission:languages.destroy');
+
         \DB::beginTransaction();
 
         try {

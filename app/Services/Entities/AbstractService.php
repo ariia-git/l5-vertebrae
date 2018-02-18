@@ -1,6 +1,5 @@
 <?php namespace App\Services\Entities;
 
-use App\Entities\AbstractRepository;
 use Carbon\Carbon;
 
 abstract class AbstractService
@@ -16,7 +15,7 @@ abstract class AbstractService
     protected $errors = [];
 
     /**
-     * @var AbstractRepository
+     * @var \App\Entities\AbstractRepository
      */
     protected $repo;
 

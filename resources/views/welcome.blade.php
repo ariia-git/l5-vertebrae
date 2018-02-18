@@ -91,6 +91,10 @@
 <div class="flex-center position-ref full-height">
     <div class="top-left links">
         <a href="{{ url('/') }}">Home</a>
+
+        @permission('admin')
+            <a href="{{ url(trans('routes.admin')) }}">Admin</a>
+        @endpermission
     </div>
 
     <div class="top-right links">

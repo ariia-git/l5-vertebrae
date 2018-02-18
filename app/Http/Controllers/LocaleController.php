@@ -25,6 +25,8 @@ class LocaleController extends AbstractController
      */
     public function index()
     {
+        $this->middleware('permission:locales');
+
         $locales = $this->service->with(['country', 'language'])->getIndex($this->count, $this->page, $this->filter, $this->sort);
         $locales->setPath(trans('routes.locales'))->appends(\Request::except('page'));
 
@@ -44,6 +46,8 @@ class LocaleController extends AbstractController
      */
     public function create()
     {
+        $this->middleware('permission:locales.create');
+
         $countries = app(CountryService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
         $languages = app(LanguageService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
 
@@ -67,6 +71,8 @@ class LocaleController extends AbstractController
      */
     public function store(AbstractFormRequest $request)
     {
+        $this->middleware('permission:locales.create');
+
         $input = $request->all();
 
         if ($request->has('active')) {
@@ -102,6 +108,8 @@ class LocaleController extends AbstractController
      */
     public function edit($id)
     {
+        $this->middleware('permission:locales.update');
+
         if ($locale = $this->service->find($id)) {
             $countries = app(CountryService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
             $languages = app(LanguageService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
@@ -133,6 +141,8 @@ class LocaleController extends AbstractController
      */
     public function update(AbstractFormRequest $request, $id)
     {
+        $this->middleware('permission:locales.update');
+
         $input = $request->all();
 
         if ($request->has('active')) {
@@ -169,6 +179,8 @@ class LocaleController extends AbstractController
      */
     public function destroy($id)
     {
+        $this->middleware('permission:locales.destroy');
+
         \DB::beginTransaction();
 
         try {
