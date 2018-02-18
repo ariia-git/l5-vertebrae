@@ -20,5 +20,6 @@ return [
     'currencies' => 'currencies',
     'languages' => 'languages',
     'locales' => 'locales',
+    'roles' => 'roles',
 
 ];

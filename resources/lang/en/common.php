@@ -33,6 +33,7 @@ return [
     'toggle_navigation' => 'Toggle Navigation',
 
     'description' => 'Description',
+    'key' => 'Key',
 
     'success' => [
         'success' => 'Success',

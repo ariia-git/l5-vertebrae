@@ -25,6 +25,7 @@ $router->group(['prefix' => \Localization::transRoute('routes.admin'), 'middlewa
     $router->resource(\Localization::transRoute('routes.currencies'), 'CurrencyController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.languages'), 'LanguageController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.locales'), 'LocaleController', ['except' => ['show']]);
+    $router->resource(\Localization::transRoute('routes.roles'), 'RoleController', ['except' => ['show']]);
 });
 
 $router->get('{all}', function () {
