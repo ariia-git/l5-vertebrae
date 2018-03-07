@@ -151,7 +151,7 @@ HTML
 HTML
         ],
         [
-            'name' => 'Users',
+            'name' => 'Ban/Unban Users',
             'key' => 'users.toggle',
             'description' => <<<HTML
 <p>Permit ability to ban/unban users.</p>

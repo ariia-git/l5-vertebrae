@@ -53,7 +53,13 @@
                             </div>
                         </div>
 
-                        {{-- todo: permission selection --}}
+                        @foreach ($permissions as $permission)
+                            <div class="checkbox">
+                                <label>
+                                    {{ \Form::checkbox('permissions[]', $permission->id) }} {{ $permission->name }}
+                                </label>
+                            </div>
+                        @endforeach
 
                         <!-- Submit Form -->
                         <div class="form-group">

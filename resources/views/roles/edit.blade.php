@@ -53,6 +53,14 @@
                             </div>
                         </div>
 
+                        @foreach ($permissions as $permission)
+                            <div class="checkbox">
+                                <label>
+                                    {{ \Form::checkbox('permissions[]', $permission->id, $permission->checked) }} {{ $permission->name }}
+                                </label>
+                            </div>
+                        @endforeach
+
                         <!-- Submit Form -->
                         <div class="form-group">
                             {!! \Form::button('<i class="fa fa-save"></i> ' . trans('common.save'), [
