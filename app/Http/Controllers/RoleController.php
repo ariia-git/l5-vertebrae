@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
+use App\Entities\Permission\Permission;
 use App\Http\Requests\AbstractFormRequest;
+use App\Services\Entities\Permission\PermissionService;
 use App\Services\Entities\Role\RoleService;
 
 class RoleController extends AbstractController
@@ -46,12 +48,17 @@ class RoleController extends AbstractController
     {
         $this->middleware('permission:roles.create');
 
+        $permissions = app(PermissionService::class)
+            ->sortBy(['key' => 'asc'])
+            ->get();
+
         $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles'), 'text' => trans_choice('roles.roles', 2)];
         $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles') . '/' . trans('routes.create'), 'text' => trans('common.create')];
 
         return view('roles.create', compact(
-            'breadcrumbs'
+            'breadcrumbs',
+            'permissions'
         ));
     }
 
@@ -67,12 +74,6 @@ class RoleController extends AbstractController
         $this->middleware('permission:roles.create');
 
         $input = $request->all();
-
-        if ($request->has('active')) {
-            $input['active'] = 1;
-        } else {
-            $input['active'] = 0;
-        }
 
         \DB::beginTransaction();
 
@@ -104,13 +105,26 @@ class RoleController extends AbstractController
         $this->middleware('permission:roles.update');
 
         if ($role = $this->service->find($id)) {
+            $permissions = app(PermissionService::class)
+                ->sortBy(['key' => 'asc'])
+                ->get()
+                ->map(function (Permission $permission) use ($role) {
+                    $permission->checked = false;
+                    if ($permission->roles()->get()->contains($role)) {
+                        $permission->checked = true;
+                    }
+
+                    return $permission;
+                });
+
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles'), 'text' => trans_choice('roles.roles', 2)];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles') . '/' . $id . '/' . trans('routes.edit'), 'text' => trans('common.edit')];
 
             return view('roles.edit', compact(
                 'breadcrumbs',
-                'role'
+                'role',
+                'permissions'
             ));
         } else {
             \Session::push('errors', trans('common.error.action_not_completed', ['item' => trans_choice('roles.roles', 1), 'action' => strtolower(trans('common.found'))]));
