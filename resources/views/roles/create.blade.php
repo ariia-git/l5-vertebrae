@@ -53,6 +53,8 @@
                             </div>
                         </div>
 
+                        <h4>Permissions</h4>
+
                         @foreach ($permissions as $permission)
                             <div class="checkbox">
                                 <label>
