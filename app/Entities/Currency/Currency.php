@@ -58,7 +58,7 @@ class Currency extends AbstractEntity
      */
     public function getName()
     {
-        return $this - $this->getAttribute('name');
+        return $this->getAttribute('name');
     }
 
     /**
