@@ -20,4 +20,52 @@ class Currency extends AbstractEntity
     {
         return $this->hasMany(Country::class);
     }
+
+    /**
+     * @return Country|null
+     */
+    public function getCountry()
+    {
+        return $this->getAttribute('country');
+    }
+
+    /**
+     * @return int
+     */
+    public function getDecimalPrecision()
+    {
+        return $this->getAttribute('decimal_precision');
+    }
+
+    /**
+     * @return float
+     */
+    public function getExchangeRate()
+    {
+        return $this->getAttribute('exchange_rate');
+    }
+
+    /**
+     * @return string
+     */
+    public function getIsoCode()
+    {
+        return $this->getAttribute('iso_code');
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name');
+    }
+
+    /**
+     * @return string
+     */
+    public function getSymbol()
+    {
+        return $this->getAttribute('symbol');
+    }
 }

@@ -32,6 +32,62 @@ class Locale extends AbstractEntity
     }
 
     /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->getAttribute('code');
+    }
+
+    /**
+     * @return Country|null
+     */
+    public function getCountry()
+    {
+        return $this->getAttribute('country');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDecimalMark()
+    {
+        return $this->getAttribute('decimal_mark');
+    }
+
+    /**
+     * @return Language|null
+     */
+    public function getLanguage()
+    {
+        return $this->getAttribute('language');
+    }
+
+    /**
+     * @return string
+     */
+    public function getThousandsSeparator()
+    {
+        return $this->getAttribute('thousands_separator');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->getAttribute('active') === 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCurrencySymbolFirst()
+    {
+        return $this->getAttribute('currency_symbol_first') === 1;
+    }
+
+    /**
      * Pull locales listed in database for localization use.
      *
      * @return array

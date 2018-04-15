@@ -20,7 +20,7 @@ class CreateCurrenciesTable extends Migration
             $table->string('name');
             $table->string('symbol')->default('$');
             $table->integer('decimal_precision')->default(2);
-            $table->decimal('exchange_rate', 8, 6)->default(1);
+            $table->decimal('exchange_rate', 12, 6)->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
