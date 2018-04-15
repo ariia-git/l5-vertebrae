@@ -21,6 +21,7 @@ $this->post(\Localization::transRoute('routes.password.reset'), 'Auth\ResetPassw
 // Admin routes
 $router->group(['prefix' => \Localization::transRoute('routes.admin'), 'middleware' => 'permission:admin'], function ($router) {
     /** @var \Illuminate\Routing\Router $router */
+    $router->resource('/', 'AdminDashboardController', ['only' => ['index']]);
     $router->resource(\Localization::transRoute('routes.countries'), 'CountryController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.currencies'), 'CurrencyController', ['except' => ['show']]);
     $router->resource(\Localization::transRoute('routes.languages'), 'LanguageController', ['except' => ['show']]);
