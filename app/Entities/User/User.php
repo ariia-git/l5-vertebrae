@@ -96,7 +96,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
      *
      * @return Role[]|Collection
      */
-    private function getRoles()
+    public function getRoles()
     {
         return $this->getAttribute('roles');
     }
