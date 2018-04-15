@@ -32,7 +32,7 @@ class CurrenciesTableSeeder extends AbstractSeeder
         ['iso_code' => 'BSD', 'name' => 'Bahamian Dollar'],
         ['iso_code' => 'BTN', 'name' => 'Bhutanese Ngultrum', 'symbol' => 'Nu.'],
         ['iso_code' => 'BWP', 'name' => 'Botswana Pula', 'symbol' => 'P'],
-        ['iso_code' => 'BYR', 'name' => 'Belarusian Ruble', 'symbol' => 'Br', 'decimal_precision' => 0],
+        ['iso_code' => 'BYN', 'name' => 'Belarusian Ruble', 'symbol' => 'Br', 'decimal_precision' => 0],
         ['iso_code' => 'BZD', 'name' => 'Belize Dollar'],
         ['iso_code' => 'CAD', 'name' => 'Canadian Dollar'],
         ['iso_code' => 'CDF', 'name' => 'Congolese Franc', 'symbol' => 'FC'],
@@ -164,7 +164,7 @@ class CurrenciesTableSeeder extends AbstractSeeder
         ['iso_code' => 'YER', 'name' => 'Yemeni Rial', 'symbol' => '﷼'],
         ['iso_code' => 'ZAR', 'name' => 'South African Rand', 'symbol' => 'R'],
         ['iso_code' => 'ZMW', 'name' => 'Zambian Kwacha', 'symbol' => 'ZK'],
-        ['iso_code' => 'ZWD', 'name' => 'Zimbabwean Dollar'],
+        ['iso_code' => 'ZWL', 'name' => 'Zimbabwean Dollar'],
     ];
 
     public function __construct(Currency $model)

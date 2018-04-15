@@ -1,7 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Entities\Language\Language;
 use App\Http\Requests\AbstractFormRequest;
 use App\Services\Entities\Language\LanguageService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class LanguageController extends AbstractController
 {
@@ -19,7 +24,7 @@ class LanguageController extends AbstractController
     /**
      * Display a listing of languages.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -41,7 +46,7 @@ class LanguageController extends AbstractController
     /**
      * Show the form for creating a new language.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -61,7 +66,7 @@ class LanguageController extends AbstractController
      * Store a newly created language in storage.
      *
      * @param AbstractFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function store(AbstractFormRequest $request)
@@ -93,17 +98,18 @@ class LanguageController extends AbstractController
      * Show the form for editing the specified language.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($id)
     {
         $this->middleware('permission:languages.update');
 
+        /** @var Language $language */
         if ($language = $this->service->find($id)) {
             $breadcrumbs = [];
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.languages'), 'text' => trans_choice('languages.languages', 2)];
-            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.languages') . '/' . trans('routes.edit'), 'text' => $language->name];
+            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.languages') . '/' . trans('routes.edit'), 'text' => $language->getName()];
 
             return view('languages.edit', compact(
                 'breadcrumbs',
@@ -119,9 +125,9 @@ class LanguageController extends AbstractController
     /**
      * Update the specified language in storage.
      *
-     * @param \App\Http\Requests\AbstractFormRequest $request
-     * @param int                                    $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param AbstractFormRequest $request
+     * @param int                 $id
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function update(AbstractFormRequest $request, $id)
@@ -153,7 +159,7 @@ class LanguageController extends AbstractController
      * Remove the specified language from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy($id)

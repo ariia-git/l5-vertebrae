@@ -1,9 +1,14 @@
 <?php namespace App\Http\Controllers;
 
+use App\Entities\Locale\Locale;
 use App\Http\Requests\AbstractFormRequest;
 use App\Services\Entities\Country\CountryService;
 use App\Services\Entities\Language\LanguageService;
 use App\Services\Entities\Locale\LocaleService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class LocaleController extends AbstractController
 {
@@ -21,7 +26,7 @@ class LocaleController extends AbstractController
     /**
      * Display a listing of locales.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -42,7 +47,7 @@ class LocaleController extends AbstractController
     /**
      * Show the form for creating a new locale.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -66,7 +71,7 @@ class LocaleController extends AbstractController
      * Store a newly created locale in storage.
      *
      * @param AbstractFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function store(AbstractFormRequest $request)
@@ -104,19 +109,20 @@ class LocaleController extends AbstractController
      * Show the form for editing the specified locale.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($id)
     {
         $this->middleware('permission:locales.update');
 
+        /** @var Locale $locale */
         if ($locale = $this->service->find($id)) {
             $countries = app(CountryService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
             $languages = app(LanguageService::class)->sortBy(['name' => 'asc'])->pluck('name', 'id');
 
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.locales'), 'text' => trans_choice('locales.locales', 2)];
-            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.locales') . '/' . $id . '/' . trans('routes.edit'), 'text' => trans('common.edit')];
+            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.locales') . '/' . $id . '/' . trans('routes.edit'), 'text' => $locale->getCode()];
 
             return view('locales.edit', compact(
                 'breadcrumbs',
@@ -134,9 +140,9 @@ class LocaleController extends AbstractController
     /**
      * Update the specified locale in storage.
      *
-     * @param \App\Http\Requests\AbstractFormRequest $request
-     * @param int                                    $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param AbstractFormRequest $request
+     * @param int                 $id
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function update(AbstractFormRequest $request, $id)
@@ -174,7 +180,7 @@ class LocaleController extends AbstractController
      * Remove the specified locale from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy($id)

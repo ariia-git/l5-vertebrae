@@ -1,9 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use App\Entities\Permission\Permission;
+use App\Entities\Role\Role;
 use App\Http\Requests\AbstractFormRequest;
 use App\Services\Entities\Permission\PermissionService;
 use App\Services\Entities\Role\RoleService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class RoleController extends AbstractController
 {
@@ -21,7 +26,7 @@ class RoleController extends AbstractController
     /**
      * Display a listing of roles.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -42,7 +47,7 @@ class RoleController extends AbstractController
     /**
      * Show the form for creating a new role.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -66,7 +71,7 @@ class RoleController extends AbstractController
      * Store a newly created role in storage.
      *
      * @param AbstractFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function store(AbstractFormRequest $request)
@@ -98,12 +103,13 @@ class RoleController extends AbstractController
      * Show the form for editing the specified role.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($id)
     {
         $this->middleware('permission:roles.update');
 
+        /** @var Role $role */
         if ($role = $this->service->find($id)) {
             $permissions = app(PermissionService::class)
                 ->sortBy(['key' => 'asc'])
@@ -119,7 +125,7 @@ class RoleController extends AbstractController
 
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles'), 'text' => trans_choice('roles.roles', 2)];
-            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles') . '/' . $id . '/' . trans('routes.edit'), 'text' => trans('common.edit')];
+            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.roles') . '/' . $id . '/' . trans('routes.edit'), 'text' => $role->getName()];
 
             return view('roles.edit', compact(
                 'breadcrumbs',
@@ -136,9 +142,9 @@ class RoleController extends AbstractController
     /**
      * Update the specified role in storage.
      *
-     * @param \App\Http\Requests\AbstractFormRequest $request
-     * @param int                                    $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param AbstractFormRequest $request
+     * @param int                 $id
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function update(AbstractFormRequest $request, $id)
@@ -176,7 +182,7 @@ class RoleController extends AbstractController
      * Remove the specified role from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy($id)

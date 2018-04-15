@@ -1,7 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Entities\Currency\Currency;
 use App\Http\Requests\AbstractFormRequest;
 use App\Services\Entities\Currency\CurrencyService;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
+use Illuminate\View\View;
 
 class CurrencyController extends AbstractController
 {
@@ -19,7 +24,7 @@ class CurrencyController extends AbstractController
     /**
      * Display a listing of currencies.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function index()
     {
@@ -40,7 +45,7 @@ class CurrencyController extends AbstractController
     /**
      * Show the form for creating a new currency.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return Factory|View
      */
     public function create()
     {
@@ -59,7 +64,7 @@ class CurrencyController extends AbstractController
      * Store a newly created currency in storage.
      *
      * @param AbstractFormRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function store(AbstractFormRequest $request)
@@ -91,16 +96,17 @@ class CurrencyController extends AbstractController
      * Show the form for editing the specified currency.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     * @return Factory|RedirectResponse|Redirector|View
      */
     public function edit($id)
     {
         $this->middleware('permission:currencies.update');
 
+        /** @var Currency $currency */
         if ($currency = $this->service->find($id)) {
             $breadcrumbs[] = ['link' => trans('routes.admin'), 'text' => trans('common.admin')];
             $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies'), 'text' => trans_choice('currencies.currencies', 2)];
-            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies') . '/' . $id . '/' . trans('routes.edit'), 'text' => $currency->name];
+            $breadcrumbs[] = ['link' => trans('routes.admin') . '/' . trans('routes.currencies') . '/' . $id . '/' . trans('routes.edit'), 'text' => $currency->getName()];
 
             return view('currencies.edit', compact(
                 'breadcrumbs',
@@ -118,7 +124,7 @@ class CurrencyController extends AbstractController
      *
      * @param AbstractFormRequest $request
      * @param int                 $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      * @throws \Exception
      */
     public function update(AbstractFormRequest $request, $id)
@@ -150,7 +156,7 @@ class CurrencyController extends AbstractController
      * Remove the specified currency from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      * @throws \Exception
      */
     public function destroy($id)

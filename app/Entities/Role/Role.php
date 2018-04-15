@@ -4,6 +4,7 @@ use App\Entities\AbstractEntity;
 use App\Entities\Permission\Permission;
 use App\Entities\User\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 
 class Role extends AbstractEntity
 {
@@ -11,7 +12,6 @@ class Role extends AbstractEntity
 
     protected $fillable = [
         'name',
-        'key',
         'key',
         'description'
     ];
@@ -24,5 +24,45 @@ class Role extends AbstractEntity
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->getAttribute('description');
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->getAttribute('key');
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getAttribute('name');
+    }
+
+    /**
+     * @return Permission[]|Collection
+     */
+    public function getPermissions()
+    {
+        return $this->getAttribute('permissions');
+    }
+
+    /**
+     * @return User[]|Collection
+     */
+    public function getUsers()
+    {
+        return $this->getAttribute('Users');
     }
 }

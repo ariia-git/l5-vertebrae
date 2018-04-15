@@ -72,23 +72,41 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     }
 
     /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->getAttribute('email');
+    }
+
+    /**
      * Get all permissions as collection.
      *
-     * @return Collection
+     * @return Permission[]|Collection
      */
-    private function getPermissions()
+    public function getPermissions()
     {
-        return $this->rolePermissions()->get()->merge($this->permissions()->get());
+        $userPermissions = $this->getAttribute('permissions');
+
+        return $this->getRolePermissions()->merge($userPermissions);
     }
 
     /**
      * Get all roles as collection.
      *
-     * @return Collection
+     * @return Role[]|Collection
      */
     private function getRoles()
     {
-        return $this->roles()->get();
+        return $this->getAttribute('roles');
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->getAttribute('username');
     }
 
     /**
@@ -138,9 +156,9 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     /**
      * Get all permissions from roles.
      *
-     * @return Builder
+     * @return Permission[]|Collection
      */
-    private function rolePermissions()
+    private function getRolePermissions()
     {
         $permissionQueryBuilder = app(PermissionQueryBuilder::class);
 
@@ -161,7 +179,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         $permissionQueryBuilder->groupByPermissionRoleUpdatedAt($permissionQuery);
         $permissionQueryBuilder->groupByPermissionDeletedAt($permissionQuery);
 
-        return $permissionQuery;
+        return $permissionQuery->get();
     }
 
     /**
